@@ -12,7 +12,7 @@ import {
 import '../../index.css';
 import styles from './app.module.css';
 
-import { AppHeader } from '@components';
+import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 import { Route, Routes } from 'react-router-dom';
 
 const App = () => (
@@ -28,6 +28,30 @@ const App = () => (
       <Route path='/profile' element={<Profile />} />
       <Route path='/profile/orders' element={<ProfileOrders />} />
       <Route path='*' element={<NotFound404 />} />
+      <Route
+        path='/feed/:number'
+        element={
+          <Modal title='' onClose={() => {}}>
+            <OrderInfo />
+          </Modal>
+        }
+      />
+      <Route
+        path='/ingredients/:id'
+        element={
+          <Modal title='' onClose={() => {}}>
+            <IngredientDetails />
+          </Modal>
+        }
+      />
+      <Route
+        path='/profile/orders/:number'
+        element={
+          <Modal title='' onClose={() => {}}>
+            <OrderInfo />
+          </Modal>
+        }
+      />
     </Routes>
   </div>
 );
