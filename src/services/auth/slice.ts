@@ -50,6 +50,7 @@ export const users = createSlice({
       .addCase(logoutUser.fulfilled, (state, action) => {
         state.user = null;
       })
+      // Обновление данных пользователя
       .addCase(updateUser.pending, (state) => {
         state.error = '';
       })
