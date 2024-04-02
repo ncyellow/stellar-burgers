@@ -14,3 +14,8 @@ export const getSauces = createSelector(
   (state) => state.ingredients.ingredients,
   (items: TIngredient[]) => items.filter((value) => value.type === 'sauce')
 );
+
+export const getAllIngredients = createSelector(
+  (state) => state.ingredients.ingredients,
+  (items: TIngredient[]) => items
+);

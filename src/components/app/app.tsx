@@ -13,7 +13,7 @@ import '../../index.css';
 import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from '../../services/store';
 import { getIngredients } from '../../services/ingredients/slice';
@@ -22,11 +22,17 @@ import { OnlyUnAuth, OnlyAuth } from './protected-route';
 
 const App = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(checkUserAuth());
     dispatch(getIngredients());
   }, []);
+
+  const closeModal = (): void => {
+    // При закрытии модалки мы всегда возвращаемся обратно
+    navigate(-1);
+  };
 
   return (
     <div className={styles.app}>
@@ -56,7 +62,7 @@ const App = () => {
         <Route
           path='/feed/:number'
           element={
-            <Modal title='' onClose={() => {}}>
+            <Modal title='' onClose={closeModal}>
               <OrderInfo />
             </Modal>
           }
@@ -64,7 +70,7 @@ const App = () => {
         <Route
           path='/ingredients/:id'
           element={
-            <Modal title='' onClose={() => {}}>
+            <Modal title='Детали ингредиента' onClose={closeModal}>
               <IngredientDetails />
             </Modal>
           }
@@ -74,7 +80,7 @@ const App = () => {
           element={
             <OnlyAuth
               component={
-                <Modal title='' onClose={() => {}}>
+                <Modal title='' onClose={closeModal}>
                   <OrderInfo />
                 </Modal>
               }

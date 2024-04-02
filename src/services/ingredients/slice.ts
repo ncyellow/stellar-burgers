@@ -1,13 +1,11 @@
 import { getIngredientsApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TIngredientsState } from './types';
-import { getBuns, getMains, getSauces } from './selectors';
 
 export const getIngredients = createAsyncThunk(
   'ingredients/getAll',
   async () => {
     const result = await getIngredientsApi();
-    console.log(result);
     return result;
   }
 );

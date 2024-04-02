@@ -4,7 +4,8 @@ import {
   TRegisterData,
   registerUserApi,
   logoutApi,
-  getUserApi
+  getUserApi,
+  updateUserApi
 } from '@api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setAuthChecked, setUser } from './slice';
@@ -37,7 +38,6 @@ export const registerUser = createAsyncThunk(
 
 export const logoutUser = createAsyncThunk('user/logout', async () => {
   const result = await logoutApi();
-  console.log(result);
   deleteCookie('accessToken');
   localStorage.removeItem('accessToken');
   localStorage.removeItem('refreshToken');
@@ -48,7 +48,6 @@ export const checkUserAuth = createAsyncThunk<
   void,
   { dispatch: AppDispatch }
 >('user/checkAuth', async (_, { dispatch }) => {
-  console.log(localStorage.getItem('accessToken'));
   if (localStorage.getItem('accessToken')) {
     getUserApi()
       .then((res) => {
@@ -65,3 +64,11 @@ export const checkUserAuth = createAsyncThunk<
     dispatch(setAuthChecked(true));
   }
 });
+
+export const updateUser = createAsyncThunk(
+  'user/update',
+  async ({ email, name, password }: TRegisterData) => {
+    const result = await updateUserApi({ email, name, password });
+    return result;
+  }
+);

@@ -2,7 +2,7 @@ import { FC, SyntheticEvent, useState } from 'react';
 import { RegisterUI } from '@ui-pages';
 import { useDispatch, useSelector } from '../../services/store';
 import { registerUser } from '../../services/auth/actions';
-import { Navigate } from 'react-router-dom';
+import { getError } from '../../services/auth/slice';
 
 export const Register: FC = () => {
   const [userName, setUserName] = useState('');
@@ -10,7 +10,7 @@ export const Register: FC = () => {
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
-  const { isAuthChecked, error } = useSelector((state) => state.users);
+  const error = useSelector(getError);
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -22,10 +22,6 @@ export const Register: FC = () => {
       })
     );
   };
-
-  if (isAuthChecked) {
-    return <Navigate to={'/profile'} />;
-  }
 
   return (
     <RegisterUI

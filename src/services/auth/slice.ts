@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
-import { registerUser, loginUser } from './actions';
+import { registerUser, loginUser, updateUser } from './actions';
 import { logoutUser } from './actions';
 
 export interface TUserState {
@@ -23,7 +23,8 @@ export const users = createSlice({
   initialState,
   selectors: {
     getUser: (state) => state.user,
-    getAuthChecked: (state) => state.isAuthChecked
+    getAuthChecked: (state) => state.isAuthChecked,
+    getError: (state) => state.error
   },
   extraReducers: (builder) => {
     builder
@@ -47,8 +48,18 @@ export const users = createSlice({
       })
       // Логаут
       .addCase(logoutUser.fulfilled, (state, action) => {
-        console.log(state);
         state.user = null;
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.error = '';
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.isAuthChecked = false;
+        state.error = action.error.message!;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.isAuthChecked = true;
+        state.user = action.payload.user;
       });
   },
   reducers: {
@@ -63,4 +74,4 @@ export const users = createSlice({
 
 export const usersReducer = users.reducer;
 export const { setAuthChecked, setUser } = users.actions;
-export const { getUser, getAuthChecked } = users.selectors;
+export const { getUser, getAuthChecked, getError } = users.selectors;

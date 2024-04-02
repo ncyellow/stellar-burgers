@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { getAuthChecked, getUser } from '../../services/auth/slice';
 import { useSelector } from '../../services/store';
-import { Navigate, NavigateProps, useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { Preloader } from '@ui';
 
 type TProtectedProps = {
@@ -31,6 +31,7 @@ export const Protected = ({
     //! на страницу авторизации
     return <Navigate to='/login' state={{ from: location }} />;
   }
+
   return component;
 };
 
