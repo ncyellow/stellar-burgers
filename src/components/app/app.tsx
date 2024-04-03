@@ -18,7 +18,7 @@ import { useEffect } from 'react';
 import { useDispatch } from '../../services/store';
 import { getIngredients } from '../../services/ingredients/slice';
 import { checkUserAuth } from '../../services/auth/actions';
-import { OnlyUnAuth, OnlyAuth } from './protected-route';
+import { OnlyUnAuth, OnlyAuth } from '../protected-route/protected-route';
 
 const App = () => {
   const dispatch = useDispatch();
