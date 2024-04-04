@@ -1,4 +1,4 @@
-import { FC, useState, SyntheticEvent } from 'react';
+import { FC, useState, SyntheticEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { forgotPasswordApi } from '@api';
@@ -21,6 +21,15 @@ export const ForgotPassword: FC = () => {
       })
       .catch((err) => setError(err));
   };
+
+  // Вроде как тут за нас уже все написали, все что надо сделать - редирект на страницу forgot-password
+  // Если ключа resetPassword нет localStorage, это значит мы не получили подтверждения на добро смены пароля
+  // Ну и чтобы нельзя быдо вернуть на страницу смены ресета пароля перезатираем историю
+  useEffect(() => {
+    if (!localStorage.getItem('resetPassword')) {
+      navigate('/forgot-password', { replace: true });
+    }
+  }, [navigate]);
 
   return (
     <ForgotPasswordUI
