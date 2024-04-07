@@ -1,0 +1,185 @@
+import { TUserState, setAuthChecked, setUser, usersReducer } from './slice';
+import { loginUser, logoutUser, registerUser, updateUser } from './actions';
+import { TUser } from '@utils-types';
+
+describe('users tests', () => {
+  test('registerUser rejected', () => {
+    const initialState: TUserState = {
+      isAuthChecked: false,
+      user: {
+        name: 'name',
+        email: 'mail'
+      },
+      error: null
+    };
+
+    const messageError = 'error';
+    const newState = usersReducer(initialState, {
+      type: registerUser.rejected.type,
+      error: {
+        message: messageError
+      }
+    });
+    expect(newState.error).toEqual(messageError);
+    expect(newState.user).toBeNull();
+  });
+
+  test('registerUser fulfilled', () => {
+    const initialState: TUserState = {
+      isAuthChecked: false,
+      user: null,
+      error: null
+    };
+
+    const testData: TUser = {
+      name: 'name',
+      email: 'email'
+    };
+
+    const newState = usersReducer(initialState, {
+      type: registerUser.fulfilled.type,
+      payload: {
+        user: testData
+      }
+    });
+    expect(newState.error).toBeNull();
+    expect(newState.user).toEqual(testData);
+    expect(newState.isAuthChecked).toEqual(true);
+  });
+
+  test('loginUser rejected', () => {
+    const initialState: TUserState = {
+      isAuthChecked: false,
+      user: {
+        name: 'name',
+        email: 'mail'
+      },
+      error: null
+    };
+
+    const messageError = 'error';
+    const newState = usersReducer(initialState, {
+      type: loginUser.rejected.type,
+      error: {
+        message: messageError
+      }
+    });
+    expect(newState.error).toEqual(messageError);
+    expect(newState.user).toBeNull();
+  });
+
+  test('loginUser fulfilled', () => {
+    const initialState: TUserState = {
+      isAuthChecked: false,
+      user: null,
+      error: null
+    };
+
+    const testData: TUser = {
+      name: 'name',
+      email: 'email'
+    };
+
+    const newState = usersReducer(initialState, {
+      type: loginUser.fulfilled.type,
+      payload: testData
+    });
+    expect(newState.error).toBeNull();
+    expect(newState.user).toEqual(testData);
+    expect(newState.isAuthChecked).toEqual(true);
+  });
+
+  test('loginOut fulfilled', () => {
+    const initialState: TUserState = {
+      isAuthChecked: false,
+      user: {
+        name: 'name',
+        email: 'mail'
+      },
+      error: null
+    };
+
+    const newState = usersReducer(initialState, {
+      type: logoutUser.fulfilled.type
+    });
+    expect(newState.user).toBeNull();
+  });
+
+  test('updateUser rejected', () => {
+    const initialState: TUserState = {
+      isAuthChecked: false,
+      user: {
+        name: 'name',
+        email: 'mail'
+      },
+      error: null
+    };
+
+    const messageError = 'error';
+    const newState = usersReducer(initialState, {
+      type: updateUser.rejected.type,
+      error: {
+        message: messageError
+      }
+    });
+    expect(newState.error).toEqual(messageError);
+    expect(newState.isAuthChecked).toEqual(false);
+  });
+
+  test('updateUser fulfilled', () => {
+    const initialState: TUserState = {
+      isAuthChecked: false,
+      user: null,
+      error: null
+    };
+
+    const testData: TUser = {
+      name: 'name',
+      email: 'email'
+    };
+
+    const newState = usersReducer(initialState, {
+      type: updateUser.fulfilled.type,
+      payload: {
+        user: testData
+      }
+    });
+    expect(newState.error).toBeNull();
+    expect(newState.user).toEqual(testData);
+    expect(newState.isAuthChecked).toEqual(true);
+  });
+
+  test('setUser', () => {
+    const initialState: TUserState = {
+      isAuthChecked: false,
+      user: null,
+      error: null
+    };
+
+    const testData: TUser = {
+      name: 'name',
+      email: 'email'
+    };
+
+    const newState = usersReducer(initialState, {
+      type: setUser.type,
+      payload: testData
+    });
+    expect(newState.user).toEqual(testData);
+  });
+
+  test('setAuthChecked', () => {
+    const initialState: TUserState = {
+      isAuthChecked: false,
+      user: null,
+      error: null
+    };
+
+    const authChecked = true;
+    const newState = usersReducer(initialState, {
+      type: setAuthChecked.type,
+      payload: authChecked
+    });
+    expect(newState.isAuthChecked).toEqual(authChecked);
+  });
+});
