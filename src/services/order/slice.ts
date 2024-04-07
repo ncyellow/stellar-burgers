@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TOrder, TOrdersData } from '@utils-types';
 import { getOrders } from './actions';
 
-type TOrdersState = {
+export type TOrdersState = {
   orders: TOrder[];
 };
 
