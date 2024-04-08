@@ -1,4 +1,4 @@
-import { feedsReducer } from './slice';
+import { feedsReducer, initialState } from './slice';
 import { getFeeds } from './actions';
 import { TOrdersData } from '@utils-types';
 
@@ -53,13 +53,6 @@ describe('feeds tests', () => {
       ],
       total: 37411,
       totalToday: 63
-    };
-
-    // У нас на старте пусто. нет заказов
-    const initialState: TOrdersData = {
-      orders: [],
-      total: 0,
-      totalToday: 0
     };
 
     const newState = feedsReducer(initialState, {

@@ -1,4 +1,4 @@
-import { TNewOrderState, orderBuilderReducer } from './slice';
+import { TNewOrderState, initialState, orderBuilderReducer } from './slice';
 import { buildOrder } from './actions';
 import { TNewOrderResponse } from '@api';
 
@@ -18,12 +18,6 @@ describe('orderBuilder tests', () => {
   };
 
   test('orderBuilder pending', () => {
-    const initialState: TNewOrderState = {
-      order: null,
-      name: null,
-      orderRequest: false
-    };
-
     const newState = orderBuilderReducer(initialState, {
       type: buildOrder.pending.type,
       payload: testData
@@ -34,12 +28,6 @@ describe('orderBuilder tests', () => {
   });
 
   test('orderBuilder rejected', () => {
-    const initialState: TNewOrderState = {
-      order: null,
-      name: null,
-      orderRequest: false
-    };
-
     const newState = orderBuilderReducer(initialState, {
       type: buildOrder.rejected.type,
       payload: testData
@@ -50,12 +38,6 @@ describe('orderBuilder tests', () => {
   });
 
   test('orderBuilder fulfilled', () => {
-    const initialState: TNewOrderState = {
-      order: null,
-      name: null,
-      orderRequest: false
-    };
-
     const newState = orderBuilderReducer(initialState, {
       type: buildOrder.fulfilled.type,
       payload: testData

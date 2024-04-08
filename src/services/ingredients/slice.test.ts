@@ -1,10 +1,5 @@
-import { TNewOrderState, orderBuilderReducer } from '../orderBuilder/slice';
-import { buildOrder } from '../orderBuilder/actions';
-import { TNewOrderResponse } from '@api';
-import { getIngredients, ingredientsReducer } from './slice';
-import { TIngredientsState } from './types';
+import { getIngredients, ingredientsReducer, initialState } from './slice';
 import { TIngredient } from '@utils-types';
-import { error } from 'console';
 
 describe('ingredients tests', () => {
   const testData: TIngredient[] = [
@@ -50,12 +45,6 @@ describe('ingredients tests', () => {
   ];
 
   test('ingredients pending', () => {
-    const initialState: TIngredientsState = {
-      ingredients: [],
-      loading: true,
-      error: null
-    };
-
     const newState = ingredientsReducer(initialState, {
       type: getIngredients.pending.type,
       payload: testData
@@ -66,12 +55,6 @@ describe('ingredients tests', () => {
   });
 
   test('ingredients rejected', () => {
-    const initialState: TIngredientsState = {
-      ingredients: [],
-      loading: true,
-      error: null
-    };
-
     const messageError = 'error';
     const newState = ingredientsReducer(initialState, {
       type: getIngredients.rejected.type,
@@ -84,12 +67,6 @@ describe('ingredients tests', () => {
   });
 
   test('ingredients fulfilled', () => {
-    const initialState: TIngredientsState = {
-      ingredients: [],
-      loading: true,
-      error: null
-    };
-
     const newState = ingredientsReducer(initialState, {
       type: getIngredients.fulfilled.type,
       payload: testData

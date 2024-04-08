@@ -1,18 +1,9 @@
-import { TUserState, setAuthChecked, setUser, usersReducer } from './slice';
+import { initialState, setAuthChecked, setUser, usersReducer } from './slice';
 import { loginUser, logoutUser, registerUser, updateUser } from './actions';
 import { TUser } from '@utils-types';
 
 describe('users tests', () => {
   test('registerUser rejected', () => {
-    const initialState: TUserState = {
-      isAuthChecked: false,
-      user: {
-        name: 'name',
-        email: 'mail'
-      },
-      error: null
-    };
-
     const messageError = 'error';
     const newState = usersReducer(initialState, {
       type: registerUser.rejected.type,
@@ -25,12 +16,6 @@ describe('users tests', () => {
   });
 
   test('registerUser fulfilled', () => {
-    const initialState: TUserState = {
-      isAuthChecked: false,
-      user: null,
-      error: null
-    };
-
     const testData: TUser = {
       name: 'name',
       email: 'email'
@@ -48,15 +33,6 @@ describe('users tests', () => {
   });
 
   test('loginUser rejected', () => {
-    const initialState: TUserState = {
-      isAuthChecked: false,
-      user: {
-        name: 'name',
-        email: 'mail'
-      },
-      error: null
-    };
-
     const messageError = 'error';
     const newState = usersReducer(initialState, {
       type: loginUser.rejected.type,
@@ -69,12 +45,6 @@ describe('users tests', () => {
   });
 
   test('loginUser fulfilled', () => {
-    const initialState: TUserState = {
-      isAuthChecked: false,
-      user: null,
-      error: null
-    };
-
     const testData: TUser = {
       name: 'name',
       email: 'email'
@@ -90,15 +60,6 @@ describe('users tests', () => {
   });
 
   test('loginOut fulfilled', () => {
-    const initialState: TUserState = {
-      isAuthChecked: false,
-      user: {
-        name: 'name',
-        email: 'mail'
-      },
-      error: null
-    };
-
     const newState = usersReducer(initialState, {
       type: logoutUser.fulfilled.type
     });
@@ -106,15 +67,6 @@ describe('users tests', () => {
   });
 
   test('updateUser rejected', () => {
-    const initialState: TUserState = {
-      isAuthChecked: false,
-      user: {
-        name: 'name',
-        email: 'mail'
-      },
-      error: null
-    };
-
     const messageError = 'error';
     const newState = usersReducer(initialState, {
       type: updateUser.rejected.type,
@@ -127,12 +79,6 @@ describe('users tests', () => {
   });
 
   test('updateUser fulfilled', () => {
-    const initialState: TUserState = {
-      isAuthChecked: false,
-      user: null,
-      error: null
-    };
-
     const testData: TUser = {
       name: 'name',
       email: 'email'
@@ -150,12 +96,6 @@ describe('users tests', () => {
   });
 
   test('setUser', () => {
-    const initialState: TUserState = {
-      isAuthChecked: false,
-      user: null,
-      error: null
-    };
-
     const testData: TUser = {
       name: 'name',
       email: 'email'
@@ -169,12 +109,6 @@ describe('users tests', () => {
   });
 
   test('setAuthChecked', () => {
-    const initialState: TUserState = {
-      isAuthChecked: false,
-      user: null,
-      error: null
-    };
-
     const authChecked = true;
     const newState = usersReducer(initialState, {
       type: setAuthChecked.type,

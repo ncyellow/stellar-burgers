@@ -1,5 +1,5 @@
 import { TOrder } from '@utils-types';
-import { TOrdersState, ordersReducer } from './slice';
+import { TOrdersState, initialState, ordersReducer } from './slice';
 import { getOrders } from './actions';
 
 describe('orders tests', () => {
@@ -52,10 +52,6 @@ describe('orders tests', () => {
     ];
 
     // У нас на старте пусто. нет заказов
-    const initialState: TOrdersState = {
-      orders: []
-    };
-
     const newState = ordersReducer(initialState, {
       type: getOrders.fulfilled.type,
       payload: testData
