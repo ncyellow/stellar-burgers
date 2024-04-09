@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { TConstructorState } from './types';
 import { TConstructorIngredient } from '@utils-types';
 
-const initialState: TConstructorState = {
+export const initialState: TConstructorState = {
   constructorItems: {
     bun: null,
     ingredients: []

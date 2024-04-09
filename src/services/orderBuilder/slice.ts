@@ -2,13 +2,13 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TOrder, TOrdersData } from '@utils-types';
 import { buildOrder } from './actions';
 
-type TNewOrderState = {
+export type TNewOrderState = {
   order: TOrder | null;
   name: string | null;
   orderRequest: boolean;
 };
 
-const initialState: TNewOrderState = {
+export const initialState: TNewOrderState = {
   order: null,
   name: null,
   orderRequest: false

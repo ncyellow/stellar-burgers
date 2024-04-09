@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TOrdersData } from '@utils-types';
 import { getFeeds } from './actions';
 
-const initialState: TOrdersData = {
+export const initialState: TOrdersData = {
   orders: [],
   total: 0,
   totalToday: 0
